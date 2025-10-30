@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>a and a music</h1>
+        <p>Building trust through music</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="hero">
+        Welcome to Our Company
+    </div>
+
+    <div class="container">
+        <section id="about" class="section">
+            <h2>About Us</h2>
+            <p>We are a professional group to provide help in design, development, and strategy. Our team is committed to delivering results and building long-term client relationships.</p>
+        </section>
+
+        <section id="services" class="section">
+            <h2>Our Services</h2>
+            <ul>
+                <li>Website Design & Development</li>
+                <li>Digital Marketing</li>
+                <li>Logo Creation</li>
+                <li>Music Creation</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact Us to Join This Project</h2>
+            <p>Email: albinbinu170@gmail.com</p>
+            <p>Phone: +91 70127 87615</p>
+        </section>
+
+        <div class="comment-box">
+            <h3>Leave a Comment</h3>
+            <input type="text" id="name" placeholder="Your Name">
+            <textarea id="comment" rows="4" placeholder="Your Comment"></textarea>
+            <button onclick="addComment()">Submit</button>
+            <div id="comment-section" class="comment-display"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 A and A Music. All rights reserved.</p>
+    </footer>
+
+    <div class="chat-bot-icon" onclick="toggleChat()">💬</div>
+
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">A and A Assistant</div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
