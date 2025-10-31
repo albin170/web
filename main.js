@@ -26,7 +26,7 @@ function addComment() {
 
         // Send comment via EmailJS
         emailjs.send("service_k9596oo", "template_sehpdqi", {
-            to_email: "albinbinu17007@gmail.com",
+            to_email: "albinbinu170@gmail.com",
             from_name: name,
             message: comment
         })
@@ -84,6 +84,7 @@ function getBotReply(msg) {
         return "Goodbye! Have a musical day! 🎵";
     return "Thanks for your message! We'll get back to you soon.";
 }
+
 
 
 
