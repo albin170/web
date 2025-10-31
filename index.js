@@ -55,3 +55,4 @@ function getBotReply(msg) {
         return "Goodbye! Have a musical day! 🎵";
     return "Thanks for your message! We'll get back to you soon.";
 }
+
