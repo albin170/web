@@ -1,19 +1,31 @@
-// Comment Box Logic
 function addComment() {
     const name = document.getElementById('name').value.trim();
     const comment = document.getElementById('comment').value.trim();
     const section = document.getElementById('comment-section');
 
     if (name && comment) {
+        // Display the comment on the page
         const div = document.createElement('div');
         div.innerHTML = `<strong>${name}</strong>: ${comment}`;
         section.appendChild(div);
         document.getElementById('name').value = '';
         document.getElementById('comment').value = '';
+
+        // Send the comment to email using EmailJS
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+            to_email: "albinbinu170@gmail.com",
+            from_name: name,
+            message: comment
+        }).then(function(response) {
+            alert('Comment sent to email successfully!');
+        }, function(error) {
+            alert('Failed to send email.');
+        });
     } else {
         alert('Please enter your name and comment.');
     }
 }
+
 
 // Chatbot Logic
 function toggleChat() {
@@ -55,6 +67,7 @@ function getBotReply(msg) {
         return "Goodbye! Have a musical day! 🎵";
     return "Thanks for your message! We'll get back to you soon.";
 }
+
 
 
 
