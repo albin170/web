@@ -1,6 +1,6 @@
-// Initialize EmailJS (make sure to include the EmailJS script in your HTML file)
+// Initialize EmailJS with your actual public key
 (function() {
-    emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+    emailjs.init("E4aD8My0U069WsY1O");  // ✅ Your public key
 })();
 
 // =============================
@@ -12,7 +12,7 @@ function addComment() {
     const section = document.getElementById('comment-section');
 
     if (name && comment) {
-        // Display the comment safely on the page
+        // Display comment on page
         const div = document.createElement('div');
         const strong = document.createElement('strong');
         strong.textContent = name;
@@ -20,22 +20,23 @@ function addComment() {
         div.append(': ' + comment);
         section.appendChild(div);
 
-        // Clear input fields
+        // Clear inputs
         document.getElementById('name').value = '';
         document.getElementById('comment').value = '';
 
-        // Send comment to email using EmailJS
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        // Send comment via EmailJS
+        emailjs.send("service_k9596oo", "template_sehpdqi", {
             to_email: "albinbinu17007@gmail.com",
             from_name: name,
             message: comment
-        }).then(function(response) {
-            alert('✅ Comment sent to email successfully!');
+        })
+        .then(function(response) {
+            alert('✅ Comment sent to your email successfully!');
+            console.log('SUCCESS!', response.status, response.text);
         }, function(error) {
             alert('❌ Failed to send email. Please try again later.');
-            console.error(error);
+            console.error('FAILED...', error);
         });
-
     } else {
         alert('⚠️ Please enter your name and comment.');
     }
@@ -44,14 +45,11 @@ function addComment() {
 // =============================
 // 💬 CHATBOT LOGIC
 // =============================
-
-// Open / close chatbot
 function toggleChat() {
     const chatBox = document.getElementById('chatBox');
     chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
 }
 
-// Send a message and show bot reply
 function sendMessage() {
     const input = document.getElementById('userInput');
     const msg = input.value.trim();
@@ -70,10 +68,8 @@ function sendMessage() {
     chatBody.scrollTop = chatBody.scrollHeight;
 }
 
-// Simple rule-based chatbot responses
 function getBotReply(msg) {
     msg = msg.toLowerCase();
-
     if (msg.includes("hello") || msg.includes("hi"))
         return "Hello! Welcome to A and A Music 🎶 How can I help you today?";
     if (msg.includes("music"))
@@ -86,9 +82,10 @@ function getBotReply(msg) {
         return "You can reach us at +91 70127 87615 or email albinbinu17007@gmail.com 📞";
     if (msg.includes("bye"))
         return "Goodbye! Have a musical day! 🎵";
-
     return "Thanks for your message! We'll get back to you soon.";
 }
+
+
 
 
 
