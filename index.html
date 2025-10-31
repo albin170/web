@@ -143,6 +143,205 @@
       bottom: 90px;
       right: 20px;
       width: 320px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: #007bff;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+    }
+
+    .chat-body {
+      padding: 10px;
+      height: 250px;
+      overflow-y: auto;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .chat-input button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .chat-input button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>A and A Music</h1>
+    <p>Building trust through music</p>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hero">
+    Welcome to A and A Music 🎶
+  </div>
+
+  <div class="container">
+    <section id="about">
+      <h2>About Us</h2>
+      <p>We are a professional creative group offering web design, branding, and music creation services. Our mission is to build trust through creativity and collaboration.</p>
+    </section>
+
+    <section id="services">
+      <h2>Our Services</h2>
+      <ul>
+        <li>Website Design & Development</li>
+        <li>Digital Marketing</li>
+        <li>Logo Creation</li>
+        <li>Music Production</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Email: <a href="mailto:albinbinu17007@gmail.com">albinbinu17007@gmail.com</a></p>
+      <p>Phone: +91 70127 87615</p>
+    </section>
+
+    <!-- ===== Comment Box ===== -->
+    <div class="comment-box">
+      <h3>Leave a Comment</h3>
+      <input type="text" id="name" placeholder="Your Name">
+      <textarea id="comment" rows="4" placeholder="Your Comment"></textarea>
+      <button onclick="addComment()">Submit</button>
+      <div id="comment-section" class="comment-display"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 A and A Music. All rights reserved.</p>
+  </footer>
+
+  <!-- ===== Chatbot ===== -->
+  <div class="chat-bot-icon" onclick="toggleChat()">💬</div>
+
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">A and A Assistant 🤖</div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <!-- ✅ Main JavaScript -->
+  <script>
+    // =============================
+    // 📝 COMMENT & EMAILJS LOGIC
+    // =============================
+    function addComment() {
+      const name = document.getElementById('name').value.trim();
+      const comment = document.getElementById('comment').value.trim();
+      const section = document.getElementById('comment-section');
+
+      if (name && comment) {
+        const div = document.createElement('div');
+        const strong = document.createElement('strong');
+        strong.textContent = name;
+        div.appendChild(strong);
+        div.append(': ' + comment);
+        section.appendChild(div);
+
+        document.getElementById('name').value = '';
+        document.getElementById('comment').value = '';
+
+        // ✅ Send comment via EmailJS
+        emailjs.send("service_k9596oo", "template_sehpdqi", {
+          to_email: "albinbinu17007@gmail.com",
+          from_name: name,
+          message: comment
+        })
+        .then(function(response) {
+          alert('✅ Comment sent to your email successfully!');
+          console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+          alert('❌ Failed to send email. Please try again later.');
+          console.error('FAILED...', error);
+        });
+      } else {
+        alert('⚠️ Please enter your name and comment.');
+      }
+    }
+
+    // =============================
+    // 💬 CHATBOT LOGIC
+    // =============================
+    function toggleChat() {
+      const chatBox = document.getElementById('chatBox');
+      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      const chatBody = document.getElementById('chatBody');
+      const userMsg = document.createElement('div');
+      userMsg.textContent = "You: " + msg;
+      chatBody.appendChild(userMsg);
+
+      const botMsg = document.createElement('div');
+      botMsg.textContent = "Bot: " + getBotReply(msg);
+      chatBody.appendChild(botMsg);
+
+      input.value = '';
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function getBotReply(msg) {
+      msg = msg.toLowerCase();
+      if (msg.includes("hello") || msg.includes("hi"))
+        return "Hello! Welcome to A and A Music 🎶 How can I help you today?";
+      if (msg.includes("music"))
+        return "We create original music and background scores! Would you like to join or collaborate?";
+      if (msg.includes("services") || msg.includes("what do you do"))
+        return "We offer web design, logo creation, digital marketing, and music production.";
+      if (msg.includes("join") || msg.includes("project"))
+        return "You can join by contacting us via email: albinbinu17007@gmail.com 💌";
+      if (msg.includes("contact"))
+        return "You can reach us at +91 70127 87615 or email albinbinu17007@gmail.com 📞";
+      if (msg.includes("bye"))
+        return "Goodbye! Have a musical day! 🎵";
+      return "Thanks for your message! We'll get back to you soon.";
+    }
+  </script>
+</body>
+</html>
+
+
 
 
 
