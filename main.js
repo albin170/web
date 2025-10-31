@@ -13,7 +13,7 @@ function addComment() {
 
         // Send the comment to email using EmailJS
         emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-            to_email:"abhinavaby07@gmail.com",
+            to_email:"albinbinu17007@gmail.com",
             from_name: name,
             message: comment
         }).then(function(response) {
@@ -67,6 +67,7 @@ function getBotReply(msg) {
         return "Goodbye! Have a musical day! 🎵";
     return "Thanks for your message! We'll get back to you soon.";
 }
+
 
 
 
