@@ -56,3 +56,4 @@ function getBotReply(msg) {
     return "Thanks for your message! We'll get back to you soon.";
 }
 
+
