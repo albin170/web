@@ -22,7 +22,7 @@ function addComment() {
     document.getElementById('comment').value = '';
 
     // Send comment via EmailJS
-    emailjs.send("service_k9596oo", "template_sehpdqi", {
+    emailjs.send("service_gm1yhd6", "template_sehpdqi", {
         from_name: name,
         to_email: "albinbinu17007@gmail.com",
         message: comment
@@ -74,6 +74,7 @@ function getBotReply(msg) {
     if (msg.includes("bye")) return "Goodbye! Have a musical day! 🎵";
     return "Thanks for your message! We'll get back to you soon.";
 }
+
 
 
 
